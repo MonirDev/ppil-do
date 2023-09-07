@@ -14,8 +14,8 @@ class AppThemeData {
     indicatorColor: AppColors.black,
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.black,
-    ),
+        backgroundColor: AppColors.white,
+        iconTheme: IconThemeData(color: AppColors.black)),
 
 //TextTheme
     textTheme: const TextTheme(

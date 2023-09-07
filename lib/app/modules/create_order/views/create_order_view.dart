@@ -34,7 +34,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
         ],
         title: Text(
           Constants.createOrder,
-          style: AppTextStyle.bw16,
+          style: AppTextStyle.bb16,
         ),
       ),
       body: _buildBody(),

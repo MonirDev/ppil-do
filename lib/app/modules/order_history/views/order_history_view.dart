@@ -21,11 +21,14 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      appBar: const CustomAppBar(
-        actions: [
+      appBar: CustomAppBar(
+        actions: const [
           LogoWidget(),
         ],
-        title: Text(Constants.orderHistory),
+        title: Text(
+          Constants.orderHistory,
+          style: AppTextStyle.bb16,
+        ),
       ),
       body: Obx(() =>
           controller.isLoading.value ? const FullSCreenLoader() : _buildBody()),

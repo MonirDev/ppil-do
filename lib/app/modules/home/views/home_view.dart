@@ -103,7 +103,7 @@ class HomeView extends GetView<HomeController> {
       leading: const LogoWidget(),
       title: Obx(() => Text(
             controller.userName.value,
-            style: AppTextStyle.bw16,
+            style: AppTextStyle.bb16,
           )),
       actions: [
         GestureDetector(
@@ -112,7 +112,7 @@ class HomeView extends GetView<HomeController> {
             children: [
               Text(
                 Constants.logout,
-                style: AppTextStyle.nw16,
+                style: AppTextStyle.nb16,
               ),
               SpacerWidget.w6,
               const Icon(

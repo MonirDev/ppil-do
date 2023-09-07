@@ -7,6 +7,7 @@ import 'package:ppildo/app/common/widgets/custom_app_bar.dart';
 import 'package:ppildo/app/common/widgets/custom_button.dart';
 import 'package:ppildo/app/utils/app_colors.dart';
 import 'package:ppildo/app/utils/constants.dart';
+import 'package:ppildo/app/utils/text_style.dart';
 
 import '../controllers/pdf_view_controller.dart';
 
@@ -18,7 +19,10 @@ class PdfViewView extends GetView<PdfViewController> {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: CustomAppBar(
-        title: const Text(Constants.orderPdf),
+        title: Text(
+          Constants.orderPdf,
+          style: AppTextStyle.bb16,
+        ),
         actions: [
           Container(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
