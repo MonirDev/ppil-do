@@ -11,7 +11,7 @@ class FullSCreenLoader extends StatelessWidget {
         height: 35,
         width: 35,
         child: CircularProgressIndicator(
-          color: AppColors.white,
+          color: AppColors.black,
           strokeWidth: 2,
         ),
       ),

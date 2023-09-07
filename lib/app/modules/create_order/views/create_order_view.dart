@@ -7,6 +7,7 @@ import 'package:ppildo/app/common/widgets/custom_button.dart';
 import 'package:ppildo/app/common/widgets/custom_table.dart';
 import 'package:ppildo/app/common/widgets/logo_widget.dart';
 import 'package:ppildo/app/common/widgets/table_header.dart';
+import 'package:ppildo/app/common/widgets/text_form_field_widget.dart';
 import 'package:ppildo/app/modules/create_order/widgets/dropdown_item_customer.dart';
 import 'package:ppildo/app/modules/create_order/widgets/dropdown_item_payment_mode.dart';
 import 'package:ppildo/app/modules/create_order/widgets/dropdown_item_product.dart';
@@ -26,12 +27,15 @@ class CreateOrderView extends GetView<CreateOrderController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bg1,
-      appBar: const CustomAppBar(
-        actions: [
+      backgroundColor: AppColors.accentColor,
+      appBar: CustomAppBar(
+        actions: const [
           LogoWidget(),
         ],
-        title: Text(Constants.createOrder),
+        title: Text(
+          Constants.createOrder,
+          style: AppTextStyle.bw16,
+        ),
       ),
       body: _buildBody(),
     );
@@ -47,6 +51,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SpacerWidget.h15,
             DropDownItemCustomer(),
             _customerDueBalance(),
             SpacerWidget.h15,
@@ -99,7 +104,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               child: CustomButton(
                 borderRadius: 6,
                 paddingHorizontal: 25,
-                bgColor: AppColors.grey.withOpacity(0.5),
+                bgColor: AppColors.amber,
                 label: Constants.addThisProduct,
                 onPressed: () => controller.addSelectedProduct(),
               ),
@@ -248,38 +253,38 @@ class CreateOrderView extends GetView<CreateOrderController> {
         children: [
           Text(
             label,
-            style: AppTextStyle.bw16,
+            style: AppTextStyle.bb16,
           ),
           SpacerWidget.h10,
           Container(
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
-              border: Border.all(color: AppColors.white),
-            ),
-            child: TextFormField(
+            height: 48,
+            decoration: const BoxDecoration(
+                color: AppColors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFFB4B4B4),
+                    offset: Offset(0, 2),
+                    blurRadius: 5,
+                    spreadRadius: 0,
+                  ),
+                ],
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: CustomTextFormField(
               controller: controllerText.value,
-              style: AppTextStyle.nw16,
-              keyboardType: inputType ?? TextInputType.number,
-              cursorColor: AppColors.white,
+              inputType: inputType ?? TextInputType.number,
+              inputAction: TextInputAction.next,
+              suffixIcon: suffixIcon != null
+                  ? Icon(
+                      suffixIcon,
+                      color: AppColors.black,
+                    )
+                  : null,
+              isPassField: false,
               readOnly: readOnly ?? false,
-              onTap: onTap ?? () {},
-              onChanged: onChanged,
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: AppTextStyle.nw14.copyWith(
-                  color: AppColors.grey,
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: horizontalpadding ?? 6,
-                ),
-                suffixIcon: suffixIcon != null
-                    ? Icon(
-                        suffixIcon,
-                        color: AppColors.white,
-                      )
-                    : null,
-              ),
+              ontap: onTap ?? () {},
+              onchanged: onChanged,
+              hintText: hintText,
+              contentpaddingLeft: 20,
             ),
           ),
         ],
@@ -296,13 +301,21 @@ class CreateOrderView extends GetView<CreateOrderController> {
             children: [
               Text(
                 Constants.selectedProducts,
-                style: AppTextStyle.bw16,
+                style: AppTextStyle.bb16,
               ),
               SpacerWidget.h10,
               Container(
                 padding: const EdgeInsets.all(5),
                 decoration: const BoxDecoration(
                   color: AppColors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFFB4B4B4),
+                      offset: Offset(0, 2),
+                      blurRadius: 5,
+                      spreadRadius: 0,
+                    ),
+                  ],
                   borderRadius: BorderRadius.all(
                     Radius.circular(8),
                   ),

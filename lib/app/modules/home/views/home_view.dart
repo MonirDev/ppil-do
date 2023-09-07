@@ -4,7 +4,6 @@ import 'package:ppildo/app/common/widgets/custom_app_bar.dart';
 import 'package:ppildo/app/common/widgets/full_screen_loader.dart';
 import 'package:ppildo/app/common/widgets/logo_widget.dart';
 import 'package:ppildo/app/utils/app_colors.dart';
-import 'package:ppildo/app/utils/assets.dart';
 import 'package:ppildo/app/utils/constants.dart';
 import 'package:ppildo/app/utils/spacer_widgets.dart';
 import 'package:ppildo/app/utils/text_style.dart';
@@ -18,7 +17,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bg1,
+      backgroundColor: AppColors.accentColor,
       appBar: _appBar(),
       body: Obx(
         () => controller.isLoading.value
@@ -43,12 +42,14 @@ class HomeView extends GetView<HomeController> {
                 Visibility(
                   visible: controller.isMr.value,
                   child: _item(
+                    AppColors.green,
                     Constants.createOrder,
                     () => controller.goToCreateOrderpage(),
                   ),
                 ),
                 SpacerWidget.h20,
                 _item(
+                  AppColors.amber,
                   Constants.orderHistory,
                   () => controller.goToOrderHistorypage(),
                 ),
@@ -60,28 +61,29 @@ class HomeView extends GetView<HomeController> {
 
   //Build body Item
   _item(
+    Color color,
     String label,
     void Function()? onPressed,
   ) {
     return GestureDetector(
       onTap: onPressed,
       child: Card(
-        elevation: 3,
-        shadowColor: AppColors.white,
-        color: AppColors.bg,
+        elevation: 6,
+        shadowColor: AppColors.black,
+        color: color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage(
-                Assets.images.bg,
-              ),
-            ),
-          ),
+        child: SizedBox(
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.circular(10),
+          //   image: DecorationImage(
+          //     fit: BoxFit.fill,
+          //     image: AssetImage(
+          //       Assets.images.bg,
+          //     ),
+          //   ),
+          // ),
           width: Get.width,
           height: 130,
           child: Center(
@@ -99,7 +101,10 @@ class HomeView extends GetView<HomeController> {
   _appBar() {
     return CustomAppBar(
       leading: const LogoWidget(),
-      title: Obx(() => Text(controller.userName.value)),
+      title: Obx(() => Text(
+            controller.userName.value,
+            style: AppTextStyle.bw16,
+          )),
       actions: [
         GestureDetector(
           onTap: () => controller.logout(),

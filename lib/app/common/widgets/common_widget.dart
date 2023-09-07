@@ -25,10 +25,11 @@ class CommonWidget {
           child: Row(
             children: [
               const SizedBox(
-                height: 25,
-                width: 25,
+                height: 20,
+                width: 20,
                 child: CircularProgressIndicator(
-                  color: AppColors.accentColor,
+                  color: AppColors.black,
+                  strokeWidth: 2,
                 ),
               ),
               SpacerWidget.w10,
@@ -69,7 +70,9 @@ class CommonWidget {
                     Get.back();
                     if (msg == Constants.tokenExpired) Get.back();
                   },
-                  child: const Text(Constants.cancel),
+                  child: const Text(
+                    Constants.cancel,
+                  ),
                 ),
               ),
               SpacerWidget.w15,
@@ -88,9 +91,11 @@ class CommonWidget {
                       Get.offAllNamed(Routes.login);
                     }
                   },
-                  child: Text(msg == Constants.tokenExpired
-                      ? Constants.login
-                      : Constants.retry),
+                  child: Text(
+                    msg == Constants.tokenExpired
+                        ? Constants.login
+                        : Constants.retry,
+                  ),
                 ),
               ),
             ],
@@ -123,7 +128,9 @@ class CommonWidget {
                   onPressed: () {
                     Get.back(result: false);
                   },
-                  child: const Text(Constants.cancel),
+                  child: const Text(
+                    Constants.cancel,
+                  ),
                 ),
               ),
               SpacerWidget.w15,
@@ -132,7 +139,9 @@ class CommonWidget {
                   onPressed: () {
                     yesFn();
                   },
-                  child: const Text(Constants.yes),
+                  child: const Text(
+                    Constants.yes,
+                  ),
                 ),
               ),
             ],

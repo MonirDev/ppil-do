@@ -41,7 +41,7 @@ class LoginView extends GetView<LoginController> {
             _buildHeaderText(),
             SpacerWidget.h30,
             _buildLoginForm(),
-            SpacerWidget.h20,
+            SpacerWidget.h30,
             _buildLoginButton(),
             SpacerWidget.h15,
           ],
@@ -82,7 +82,7 @@ class LoginView extends GetView<LoginController> {
             controller.isUserNameEmpty.value == true
                 ? _buildValidateText(Constants.userNameRequired)
                 : const SizedBox(),
-            SpacerWidget.h15,
+            SpacerWidget.h10,
             _buildPasswordTextFormField(),
             controller.isPassEmpty.value == true
                 ? _buildValidateText(Constants.passRequired)
@@ -96,10 +96,10 @@ class LoginView extends GetView<LoginController> {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: const EdgeInsets.only(top: 8),
+        padding: const EdgeInsets.only(top: 8, left: 15),
         child: Text(
           value,
-          style: AppTextStyle.nw10.copyWith(color: AppColors.red),
+          style: AppTextStyle.nw12.copyWith(color: AppColors.red),
         ),
       ),
     );
@@ -107,42 +107,70 @@ class LoginView extends GetView<LoginController> {
 
   //Build Password TextFormField
   Widget _buildPasswordTextFormField() {
-    return CustomTextFormField(
-      controller: controller.passwordTextEditingController.value,
-      inputType: TextInputType.visiblePassword,
-      inputAction: TextInputAction.go,
-      suffixEye: controller.isPassSecure.value
-          ? Icons.visibility_off
-          : Icons.visibility,
-      isPassField: true,
-      isPassSecure: controller.isPassSecure.value,
-      onchanged: (value) {
-        controller.passwordTextEditingController.value.text == ''
-            ? controller.isPassEmpty.value = true
-            : controller.isPassEmpty.value = false;
-      },
-      suffixClick: () {
-        controller.isPassSecure.value = !controller.isPassSecure.value;
-      },
-      label: Constants.password,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Text(
+            Constants.password,
+            style: AppTextStyle.bb16,
+          ),
+        ),
+        SpacerWidget.h10,
+        CustomTextFormField(
+          controller: controller.passwordTextEditingController.value,
+          inputType: TextInputType.visiblePassword,
+          inputAction: TextInputAction.go,
+          suffixEye: controller.isPassSecure.value
+              ? Icons.visibility_off
+              : Icons.visibility,
+          isPassField: true,
+          isPassSecure: controller.isPassSecure.value,
+          onchanged: (value) {
+            controller.passwordTextEditingController.value.text == ''
+                ? controller.isPassEmpty.value = true
+                : controller.isPassEmpty.value = false;
+          },
+          suffixClick: () {
+            controller.isPassSecure.value = !controller.isPassSecure.value;
+          },
+          hintText: Constants.enterPassword,
+          borderRadius: 30,
+        ),
+      ],
     );
   }
 
 //Build Email TextFormField
   Widget _buildUserNameTextFormField() {
-    return CustomTextFormField(
-      controller: controller.userNameTextEditingController.value,
-      inputType: TextInputType.emailAddress,
-      inputAction: TextInputAction.next,
-      suffixDone: Icons.done,
-      suffixClose: Icons.close,
-      isPassField: false,
-      onchanged: (value) {
-        controller.userNameTextEditingController.value.text == ''
-            ? controller.isUserNameEmpty.value = true
-            : controller.isUserNameEmpty.value = false;
-      },
-      label: Constants.userName,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Text(
+            Constants.userName,
+            style: AppTextStyle.bb16,
+          ),
+        ),
+        SpacerWidget.h10,
+        CustomTextFormField(
+          controller: controller.userNameTextEditingController.value,
+          inputType: TextInputType.emailAddress,
+          inputAction: TextInputAction.next,
+          suffixDone: Icons.done,
+          suffixClose: Icons.close,
+          isPassField: false,
+          onchanged: (value) {
+            controller.userNameTextEditingController.value.text == ''
+                ? controller.isUserNameEmpty.value = true
+                : controller.isUserNameEmpty.value = false;
+          },
+          hintText: Constants.enterUserName,
+          borderRadius: 30,
+        ),
+      ],
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ppildo/app/data/models/customer_model.dart';
 import 'package:ppildo/app/modules/create_order/controllers/create_order_controller.dart';
+import 'package:ppildo/app/utils/app_colors.dart';
 import 'package:ppildo/app/utils/constants.dart';
 import 'package:ppildo/app/utils/spacer_widgets.dart';
 import 'package:ppildo/app/utils/text_style.dart';
@@ -20,21 +21,35 @@ class DropDownItemCustomer extends StatelessWidget {
           _label(Constants.selectCustomer),
           SpacerWidget.h10,
           Obx(
-            () => DropdownSearch<CustomerModel>(
-              selectedItem: controller.customerModel.value.name == null
-                  ? null
-                  : controller.customerModel.value,
-              // ignore: invalid_use_of_protected_member
-              items: controller.customerList.value,
-              itemAsString: (CustomerModel item) => item.name ?? "",
-              dropdownDecoratorProps: Constants.dropDownStyle,
-              onChanged: (selectedItem) => controller.customerChanged(
-                selectedItem!,
-              ),
-              popupProps: const PopupProps.bottomSheet(
-                constraints: Constants.constraints,
-                showSearchBox: true,
-                bottomSheetProps: Constants.bottomSheetProps,
+            () => Container(
+              height: 48,
+              decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFFB4B4B4),
+                      offset: Offset(0, 2),
+                      blurRadius: 5,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: DropdownSearch<CustomerModel>(
+                selectedItem: controller.customerModel.value.name == null
+                    ? null
+                    : controller.customerModel.value,
+                // ignore: invalid_use_of_protected_member
+                items: controller.customerList.value,
+                itemAsString: (CustomerModel item) => item.name ?? "",
+                dropdownDecoratorProps: Constants.dropDownStyle,
+                onChanged: (selectedItem) => controller.customerChanged(
+                  selectedItem!,
+                ),
+                popupProps: const PopupProps.bottomSheet(
+                  constraints: Constants.constraints,
+                  showSearchBox: true,
+                  bottomSheetProps: Constants.bottomSheetProps,
+                ),
               ),
             ),
           ),
@@ -47,7 +62,7 @@ class DropDownItemCustomer extends StatelessWidget {
   _label(String label) {
     return Text(
       label,
-      style: AppTextStyle.bw16,
+      style: AppTextStyle.bb16,
     );
   }
 }

@@ -12,11 +12,9 @@ class SplashScreenView extends GetView<SplashScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.black,
-        body: _buildBody(),
-      ),
+    return Scaffold(
+      backgroundColor: AppColors.accentColor,
+      body: _buildBody(),
     );
   }
 

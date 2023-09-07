@@ -61,6 +61,8 @@ class Constants {
   ////
   static const String login = "Login";
   static const String userName = "User Name";
+  static const String enterUserName = "Enter username";
+  static const String enterPassword = "Enter password";
   static const String password = "Password";
   static const String userNameRequired = "User name is required!";
   static const String passRequired = "Password is required!";
@@ -254,20 +256,24 @@ class Constants {
       BorderSide(width: 1, color: AppColors.black);
 
   static final DropDownDecoratorProps dropDownStyle = DropDownDecoratorProps(
-    baseStyle: AppTextStyle.bw14,
+    baseStyle: AppTextStyle.bb14,
     dropdownSearchDecoration: InputDecoration(
-      hintText: Constants.pleaseSelect,
-      hintStyle: AppTextStyle.nw14.copyWith(
-        color: AppColors.grey,
-      ),
-      suffixIconColor: AppColors.white,
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.white),
-      ),
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.white),
-      ),
-    ),
+        hintText: Constants.pleaseSelect,
+        hintStyle: AppTextStyle.nw14.copyWith(
+          color: AppColors.grey,
+        ),
+        suffixIconColor: AppColors.black,
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.transparent,
+          ),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.transparent,
+          ),
+        ),
+        contentPadding: const EdgeInsets.only(top: 2, left: 15)),
   );
 
   static const BoxConstraints constraints = BoxConstraints(
@@ -275,6 +281,6 @@ class Constants {
   );
   static const BottomSheetProps bottomSheetProps = BottomSheetProps(
     elevation: 16,
-    backgroundColor: AppColors.white,
+    backgroundColor: Color(0xFFFDF3D6),
   );
 }

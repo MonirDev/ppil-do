@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryColor = Color(0xFF17171A);
-  static const Color accentColor = Color(0xFF17171A);
-  static const Color splashColor = Color(0xFF17171A);
-  static const Color highlightColor = Color(0xFF17171A);
+  static const Color primaryColor = Color(0xFFFFFFFF);
+  static const Color accentColor = Color(0xFFFFFFFF);
+  static const Color splashColor = Color(0xFFFFFFFF);
+  static const Color highlightColor = Color(0xFFFFFFFF);
   static const Color dividerColor = Color(0xFF343A40);
   static const Color errorColor = Color(0xffDF4756);
   static const Color transparent = Colors.transparent;
@@ -17,6 +17,8 @@ class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color bg = Color(0xFF252529);
   static const Color green = Colors.green;
+  static const Color amber = Colors.amber;
+  static const Color blue = Colors.blue;
   static const Color bg1 = Color(0xFF1A2531);
 
   //gradient Color

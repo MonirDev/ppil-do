@@ -16,7 +16,7 @@ class PdfViewView extends GetView<PdfViewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bg1,
+      backgroundColor: AppColors.primaryColor,
       appBar: CustomAppBar(
         title: const Text(Constants.orderPdf),
         actions: [
@@ -25,7 +25,7 @@ class PdfViewView extends GetView<PdfViewController> {
             child: CustomButton(
               borderRadius: 6,
               paddingHorizontal: 10,
-              bgColor: AppColors.grey.withOpacity(0.5),
+              bgColor: AppColors.amber,
               label: Constants.downloadPdf,
               onPressed: () => controller.downloadPdf(),
             ),
@@ -38,7 +38,7 @@ class PdfViewView extends GetView<PdfViewController> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
                 child: CircularProgressIndicator(
-              color: AppColors.white,
+              color: AppColors.black,
             ));
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));

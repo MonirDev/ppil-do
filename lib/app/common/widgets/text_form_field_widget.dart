@@ -9,14 +9,20 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? suffixDone;
   final IconData? suffixClose;
   final IconData? suffixEye;
+  final Widget? suffixIcon;
   final bool? isValid;
   final bool? isPassField;
   final bool? isPassSecure;
   final bool? enabled;
+  final bool? readOnly;
   final String? validateText;
-  final String label;
-  final Function(String) onchanged;
+  final String? label;
+  final double? contentpaddingLeft;
+  final double? borderRadius;
+  final String hintText;
+  final Function(String)? onchanged;
   final Function()? suffixClick;
+  final void Function()? ontap;
   const CustomTextFormField({
     super.key,
     this.controller,
@@ -31,8 +37,14 @@ class CustomTextFormField extends StatelessWidget {
     this.validateText,
     this.suffixClick,
     required this.onchanged,
-    required this.label,
+    this.label,
     this.enabled,
+    required this.hintText,
+    this.suffixIcon,
+    this.ontap,
+    this.contentpaddingLeft,
+    this.readOnly,
+    this.borderRadius,
   });
   static const InputBorder transparentBorder = OutlineInputBorder(
     borderSide: BorderSide(
@@ -45,69 +57,78 @@ class CustomTextFormField extends StatelessWidget {
       height: 60,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: AppColors.grey.withOpacity(0.2),
+          color: AppColors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0xFFB4B4B4),
+              offset: Offset(0, 2),
+              blurRadius: 5,
+              spreadRadius: 0,
+            ),
+          ],
           border: Border.all(
               color: isValid == false && controller!.text != ''
                   ? AppColors.red
                   : AppColors.transparent),
-          borderRadius: const BorderRadius.all(Radius.circular(5))),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 8),
-        child: TextFormField(
-          controller: controller,
-          keyboardType: inputType,
-          textInputAction: inputAction,
-          maxLines: 1,
-          enabled: enabled ?? true,
-          style: AppTextStyle.nw16,
-          cursorColor: AppColors.white,
-          obscureText: isPassSecure ?? false,
-          decoration: InputDecoration(
-            suffixIcon: GestureDetector(
-              onTap: suffixClick ?? () {},
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: isValid == true &&
-                        controller!.text != '' &&
-                        isPassField == false
-                    ? Icon(
-                        suffixDone,
-                        color: AppColors.green,
-                      )
-                    : isValid == false &&
+          borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 20))),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: inputType,
+        textInputAction: inputAction,
+        maxLines: 1,
+        enabled: enabled ?? true,
+        readOnly: readOnly ?? false,
+        style: AppTextStyle.nb16,
+        cursorColor: AppColors.black,
+        obscureText: isPassSecure ?? false,
+        onTap: ontap,
+        decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: AppTextStyle.nw14.copyWith(color: AppColors.grey),
+            suffixIcon: suffixIcon ??
+                GestureDetector(
+                  onTap: suffixClick ?? () {},
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: isValid == true &&
                             controller!.text != '' &&
                             isPassField == false
                         ? Icon(
-                            suffixClose,
-                            color: AppColors.red,
+                            suffixDone,
+                            color: AppColors.green,
                           )
-                        : isPassField == true
+                        : isValid == false &&
+                                controller!.text != '' &&
+                                isPassField == false
                             ? Icon(
-                                suffixEye,
-                                color: AppColors.grey,
+                                suffixClose,
+                                color: AppColors.red,
                               )
-                            : null,
-              ),
-            ),
-            label: Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Text(
-                label,
-                style: AppTextStyle.nw14.copyWith(
-                    color: isValid == false && controller!.text != ''
-                        ? AppColors.red
-                        : AppColors.grey),
-              ),
-            ),
+                            : isPassField == true
+                                ? Icon(
+                                    suffixEye,
+                                    color: AppColors.grey,
+                                  )
+                                : null,
+                  ),
+                ),
+            label: label == null
+                ? null
+                : Text(
+                    label!,
+                    style: AppTextStyle.nw16.copyWith(
+                        color: isValid == false && controller!.text != ''
+                            ? AppColors.red
+                            : AppColors.black.withOpacity(0.8)),
+                  ),
             border: transparentBorder,
             focusedBorder: transparentBorder,
             errorBorder: transparentBorder,
             focusedErrorBorder: transparentBorder,
             disabledBorder: transparentBorder,
             enabledBorder: transparentBorder,
-          ),
-          onChanged: onchanged,
-        ),
+            contentPadding: EdgeInsets.only(left: contentpaddingLeft ?? 30)),
+        onChanged: onchanged,
       ),
     );
   }
