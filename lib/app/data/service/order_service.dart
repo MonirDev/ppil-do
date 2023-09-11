@@ -87,6 +87,7 @@ class OrderService extends DioBaseService {
   Future<Response> getSalesWithDate(
     DateTime fromDate,
     DateTime toDate,
+    String endpoint,
   ) async {
     final data = {
       "fromDate": fromDate.toIso8601String(),
@@ -94,7 +95,7 @@ class OrderService extends DioBaseService {
     };
     try {
       return await _dio.post(
-        Constants.getSalesWithDateEndpoint,
+        endpoint,
         data: data,
       );
     } catch (e) {

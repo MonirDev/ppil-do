@@ -8,6 +8,7 @@ import 'package:ppildo/app/data/models/product_model.dart';
 import 'package:ppildo/app/data/models/sales_with_date_model.dart';
 import 'package:ppildo/app/data/models/sub_customer_model.dart';
 import 'package:ppildo/app/data/service/order_service.dart';
+import 'package:ppildo/app/modules/home/controllers/home_controller.dart';
 import 'package:ppildo/app/utils/constants.dart';
 
 class OrderDataSource {
@@ -24,6 +25,9 @@ class OrderDataSource {
         final response = await orderService.getSalesWithDate(
           fromDate,
           toDate,
+          Get.find<HomeController>().isMr.value
+              ? Constants.getSalesWithDateMREndpoint
+              : Constants.getSalesWithDateASMEndpoint,
         );
         if (response.statusCode == 200) {
           final responseBody = response.data;

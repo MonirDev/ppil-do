@@ -18,7 +18,10 @@ class Constants {
       "SubCustomers/GetSubCustomersByCustId";
   static const String getProductEndpoint = "ProductItems/GetProductItems";
   static const String postSaleEndpoint = "SaleOrders/PostSale";
-  static const String getSalesWithDateEndpoint = "SaleOrders/GetSalesWithDate";
+  static const String getSalesWithDateMREndpoint =
+      "SaleOrders/GetSalesWithDateMR";
+  static const String getSalesWithDateASMEndpoint =
+      "SaleOrders/GetSalesWithDateASM";
   static const String getSalesWithDateApprovedAsmEndpoint =
       "SaleOrders/GetSalesWithDateApprovedAsm";
   static const String getPdfEndpoint = "HtmlToPdf/GetHtmltoPdfOrder?id=";
