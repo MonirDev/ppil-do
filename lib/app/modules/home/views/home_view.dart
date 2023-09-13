@@ -47,14 +47,28 @@ class HomeView extends GetView<HomeController> {
                     () => controller.goToCreateOrderpage(),
                   ),
                 ),
-                SpacerWidget.h20,
+                Visibility(
+                  visible: !controller.isMr.value,
+                  child: _newOrderCount(),
+                ),
+                controller.isMr.value ? SpacerWidget.h20 : SpacerWidget.h8,
                 _item(
-                  AppColors.amber,
+                  AppColors.blue,
                   Constants.orderHistory,
                   () => controller.goToOrderHistorypage(),
                 ),
               ],
             )),
+      ),
+    );
+  }
+
+//new Order
+  Widget _newOrderCount() {
+    return Center(
+      child: Text(
+        "New Order: ${controller.newCount}",
+        style: AppTextStyle.bb14,
       ),
     );
   }

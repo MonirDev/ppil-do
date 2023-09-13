@@ -148,4 +148,25 @@ class OrderDataSource {
       rethrow;
     }
   }
+
+  Future<int?> newOrderCount() async {
+    try {
+      if (await CheckNetwork.checkNetwork() == false) {
+        throw "${Constants.checkConnectivity}, ${Constants.tryAgain}";
+      } else {
+        final response = await orderService.newOrderCount();
+        if (response.statusCode == 200) {
+          final responseBody = response.data;
+          log("count $responseBody");
+          return responseBody;
+        } else if (response.statusCode == 401) {
+          throw (Constants.tokenExpired);
+        } else {
+          throw ("${Constants.failedToConnectServer} , ${Constants.tryAgain}");
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

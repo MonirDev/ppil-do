@@ -51,7 +51,7 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
             CustomButton(
               borderRadius: 6,
               paddingHorizontal: 25,
-              bgColor: AppColors.amber,
+              bgColor: AppColors.blue,
               label: Constants.search,
               onPressed: () => controller.onSearch(),
             ),

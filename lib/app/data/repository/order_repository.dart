@@ -89,4 +89,13 @@ class OrderRepository {
       rethrow;
     }
   }
+
+  Future<int?> newOrderCount() async {
+    try {
+      final response = await OrderDataSource().newOrderCount();
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

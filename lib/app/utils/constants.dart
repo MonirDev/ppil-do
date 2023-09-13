@@ -28,6 +28,7 @@ class Constants {
   static const String getUserModulesEndpoint =
       "Modules/GetModulesForMenuByUserName?userName=";
   static const String orderApprovedAsm = "SaleOrders/IsReadOrderAsm";
+  static const String orderCountAsmNew = "SaleOrders/GetOrderCount";
 //##################
 
   static const String home = "Home";

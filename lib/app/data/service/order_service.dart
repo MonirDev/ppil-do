@@ -167,4 +167,20 @@ class OrderService extends DioBaseService {
       throw Constants.networkProblemPleaseTryAgainLater;
     }
   }
+
+//
+  Future<Response> newOrderCount() async {
+    try {
+      return await _dio.get(
+        Constants.orderCountAsmNew,
+      );
+    } catch (e) {
+      if (e is DioException) {
+        if (e.response?.statusCode == 401) {
+          throw (Constants.tokenExpired);
+        }
+      }
+      throw Constants.networkProblemPleaseTryAgainLater;
+    }
+  }
 }

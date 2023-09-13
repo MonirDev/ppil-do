@@ -29,7 +29,7 @@ class PdfViewView extends GetView<PdfViewController> {
             child: CustomButton(
               borderRadius: 6,
               paddingHorizontal: 10,
-              bgColor: AppColors.amber,
+              bgColor: AppColors.blue,
               label: Constants.downloadPdf,
               onPressed: () => controller.downloadPdf(),
             ),

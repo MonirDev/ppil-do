@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:ppildo/app/common/widgets/common_widget.dart';
 import 'package:ppildo/app/data/repository/customer_repository.dart';
+import 'package:ppildo/app/data/repository/order_repository.dart';
 import 'package:ppildo/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:ppildo/app/modules/order_history/controllers/order_history_controller.dart';
 import 'package:ppildo/app/routes/app_pages.dart';
@@ -14,9 +15,11 @@ class HomeController extends GetxController with StateMixin {
   late SharedPreferences pref;
   var isMr = true.obs;
   var isLoading = false.obs;
+  int newCount = 0;
 
   //Put repository
   final CustomerRepository _customerRepository = Get.put(CustomerRepository());
+  final OrderRepository _orderRepository = Get.put(OrderRepository());
 
   @override
   void onInit() async {
@@ -48,7 +51,7 @@ class HomeController extends GetxController with StateMixin {
         (value) async {
           isMr.value = value.userModulesList
               .any((element) => element.title == Constants.mrTypeString);
-          isLoading(false);
+          await newOrderCount();
         },
       );
     } catch (e) {
@@ -57,6 +60,23 @@ class HomeController extends GetxController with StateMixin {
         if (e.toString() != Constants.tokenExpired) getuserInfo(userName);
       });
       log("UserModules Api error");
+    }
+  }
+
+  Future<void> newOrderCount() async {
+    try {
+      await _orderRepository.newOrderCount().then(
+        (value) async {
+          newCount = value ?? 0;
+          isLoading(false);
+        },
+      );
+    } catch (e) {
+      isLoading(false);
+      CommonWidget.responseErrorPopUp(e.toString(), () {
+        if (e.toString() != Constants.tokenExpired) getuserInfo(userName.value);
+      });
+      log("New Order count Api error");
     }
   }
 

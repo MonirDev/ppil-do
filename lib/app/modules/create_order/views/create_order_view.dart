@@ -104,7 +104,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               child: CustomButton(
                 borderRadius: 6,
                 paddingHorizontal: 25,
-                bgColor: AppColors.amber,
+                bgColor: AppColors.blue,
                 label: Constants.addThisProduct,
                 onPressed: () => controller.addSelectedProduct(),
               ),
@@ -171,6 +171,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               child: CustomButton(
                 borderRadius: 6,
                 paddingHorizontal: 50,
+                bgColor: AppColors.green,
                 label: Constants.placeOrder,
                 onPressed: () => controller.placeOrder(),
               ),
