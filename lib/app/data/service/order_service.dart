@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ppildo/app/data/models/customer_model.dart';
 import 'package:ppildo/app/data/models/product_model.dart';
-import 'package:ppildo/app/data/models/sales_with_date_model.dart';
+import 'package:ppildo/app/data/models/sales_with_date_asm_model.dart';
 import 'package:ppildo/app/data/models/sub_customer_model.dart';
 import 'package:ppildo/app/data/service/dio_base_service.dart';
 import 'package:ppildo/app/utils/constants.dart';
@@ -119,7 +119,7 @@ class OrderService extends DioBaseService {
     };
     try {
       return await _dio.post(
-        Constants.getSalesWithDateApprovedAsmEndpoint,
+        Constants.getSalesWithDateASMEndpoint,
         data: data,
       );
     } catch (e) {
@@ -151,7 +151,7 @@ class OrderService extends DioBaseService {
   }
 
   Future<Response> orderApprovedAsm(
-    SalesWithDateModel data,
+    OrderAsmModel data,
   ) async {
     try {
       return await _dio.post(

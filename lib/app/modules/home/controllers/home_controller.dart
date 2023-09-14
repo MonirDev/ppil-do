@@ -6,6 +6,7 @@ import 'package:ppildo/app/data/repository/customer_repository.dart';
 import 'package:ppildo/app/data/repository/order_repository.dart';
 import 'package:ppildo/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:ppildo/app/modules/order_history/controllers/order_history_controller.dart';
+import 'package:ppildo/app/modules/order_history_asm/controllers/order_history_asm_controller.dart';
 import 'package:ppildo/app/routes/app_pages.dart';
 import 'package:ppildo/app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,9 +39,15 @@ class HomeController extends GetxController with StateMixin {
 
 //go to OrderHistory Page
   goToOrderHistorypage() {
-    Get.delete<OrderHistoryController>();
-    Get.put(OrderHistoryController());
-    Get.toNamed(Routes.orderHistory);
+    if (isMr.value) {
+      Get.delete<OrderHistoryController>();
+      Get.put(OrderHistoryController());
+      Get.toNamed(Routes.orderHistory);
+    } else {
+      Get.delete<OrderHistoryAsmController>();
+      Get.put(OrderHistoryAsmController());
+      Get.toNamed(Routes.orderHistoryAsm);
+    }
   }
 
 //Call User modules

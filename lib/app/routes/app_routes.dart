@@ -10,6 +10,7 @@ abstract class Routes {
   static const orderHistory = _Paths.orderHistory;
   // ignore: constant_identifier_names
   static const pdf_view = _Paths.pdf_view;
+  static const orderHistoryAsm = _Paths.orderHistoryAsm;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const orderHistory = '/order-history';
   // ignore: constant_identifier_names
   static const pdf_view = '/pdf-view';
+  static const orderHistoryAsm = '/order-history-asm';
 }

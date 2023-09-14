@@ -4,36 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ppildo/app/common/widgets/common_widget.dart';
-import 'package:ppildo/app/data/models/sales_with_date_model.dart';
+import 'package:ppildo/app/data/models/sales_with_date_asm_model.dart';
 import 'package:ppildo/app/data/repository/order_repository.dart';
 import 'package:ppildo/app/modules/home/controllers/home_controller.dart';
-import 'package:ppildo/app/modules/order_history/helper/order_table_data_source.dart';
+import 'package:ppildo/app/modules/order_history_asm/helper/order_table_data_source.dart';
 import 'package:ppildo/app/utils/constants.dart';
 
-class OrderHistoryController extends GetxController {
+class OrderHistoryAsmController extends GetxController {
   var selectFromDateTextEditingController = TextEditingController().obs;
   var selectToDateTextEditingController = TextEditingController().obs;
 //value
   Rx<DateTime> selectedFromDate = DateTime.now().obs;
   Rx<DateTime> selectedToDate = DateTime.now().obs;
 
-  Rx<OrderTableDataSource> tableDataSource = OrderTableDataSource(
+  Rx<OrderTableDataSourceAsm> tableDataSource = OrderTableDataSourceAsm(
     orderData: [],
     isMr: true,
   ).obs;
 
-  var orderList = <SalesWithDateModel>[].obs;
+  var orderList = <OrderAsmModel>[].obs;
   var isLoading = true.obs;
 
 //put repository
   final OrderRepository _orderRepository = Get.put(OrderRepository());
-  final HomeController _homeController = Get.find<HomeController>();
 
   @override
   void onInit() async {
     super.onInit();
-
-    await getSalesWithDateList();
+    await getSalesWithDateASMList();
 
     selectFromDateTextEditingController.value.text =
         DateFormat(Constants.dateFormat).format(selectedFromDate.value);
@@ -41,27 +39,50 @@ class OrderHistoryController extends GetxController {
         DateFormat(Constants.dateFormat).format(selectedToDate.value);
   }
 
+  orderApprovedASM(int index) {
+    CommonWidget.yesCancelPopUp(Constants.areUSureToApprovedDo, () async {
+      Get.back();
+      CommonWidget.loader();
+      try {
+        await _orderRepository.orderApprovedAsm(orderList[index]).then(
+          (value) async {
+            Get.back();
+
+            await getSalesWithDateASMList();
+          },
+        );
+      } catch (e) {
+        Get.back();
+        CommonWidget.responseErrorPopUp(e.toString(), () {
+          if (e.toString() != Constants.tokenExpired) getSalesWithDateASMList();
+        });
+        log("orderApprovedASM Api error");
+      }
+      // orderList[0].toJson();
+    });
+  }
+
   //on Search
   onSearch() async {
-    await getSalesWithDateList();
+    await getSalesWithDateASMList();
   }
 
   //Get Order list
-  getSalesWithDateList() async {
+  getSalesWithDateASMList() async {
     isLoading(true);
     try {
       await _orderRepository
-          .getSalesWithDateList(
+          .getSalesWithDateASMList(
         selectedFromDate.value,
         selectedToDate.value,
       )
           .then(
         (value) async {
           orderList.value = value.salesWithDateList;
-          orderList.add(SalesWithDateModel(billAmount: 0.0));
-          tableDataSource.value = OrderTableDataSource(
+          orderList.add(OrderAsmModel(billAmount: 0.0));
+          tableDataSource.value = OrderTableDataSourceAsm(
             orderData: orderList,
-            isMr: _homeController.isMr.value,
+            isMr: Get.find<HomeController>().isMr.value,
           );
 
           isLoading(false);
@@ -70,9 +91,9 @@ class OrderHistoryController extends GetxController {
     } catch (e) {
       isLoading(false);
       CommonWidget.responseErrorPopUp(e.toString(), () {
-        if (e.toString() != Constants.tokenExpired) getSalesWithDateList();
+        if (e.toString() != Constants.tokenExpired) getSalesWithDateASMList();
       });
-      log("GetSalesWithDate Api error");
+      log("GetSalesWithDateASM Api error");
     }
   }
 

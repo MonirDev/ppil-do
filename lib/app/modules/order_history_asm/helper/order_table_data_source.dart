@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ppildo/app/common/widgets/custom_button.dart';
-import 'package:ppildo/app/data/models/sales_with_date_model.dart';
+import 'package:ppildo/app/data/models/sales_with_date_asm_model.dart';
+import 'package:ppildo/app/modules/order_history_asm/controllers/order_history_asm_controller.dart';
 import 'package:ppildo/app/routes/app_pages.dart';
 import 'package:ppildo/app/utils/app_colors.dart';
 import 'package:ppildo/app/utils/constants.dart';
 import 'package:ppildo/app/utils/spacer_widgets.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class OrderTableDataSource extends DataGridSource {
-  OrderTableDataSource({
-    required List<SalesWithDateModel> orderData,
+class OrderTableDataSourceAsm extends DataGridSource {
+  OrderTableDataSourceAsm({
+    required List<OrderAsmModel> orderData,
     required bool isMr,
   }) {
     _orderData = List.generate(
@@ -21,6 +22,9 @@ class OrderTableDataSource extends DataGridSource {
           DataGridCell<String>(
               columnName: Constants.sl,
               value: index < orderData.length - 1 ? "${index + 1}" : ""),
+          DataGridCell<String>(
+              columnName: Constants.mr,
+              value: orderData[index].salesPerson ?? ""),
           DataGridCell<String>(
             columnName: Constants.date,
             value: orderData[index].saleOrderDate == null
@@ -33,20 +37,17 @@ class OrderTableDataSource extends DataGridSource {
               value: "${orderData[index].customerId ?? ""}"),
           DataGridCell<String>(
               columnName: Constants.party,
-              value: orderData[index].customer?.name ?? ""),
+              value: orderData[index].customerName ?? ""),
           DataGridCell<String>(
               columnName: Constants.subId,
               value: "${orderData[index].subCustomerId ?? ""}"),
           DataGridCell<String>(
               columnName: Constants.subDealer,
-              value: orderData[index].subCustomer?.subCustomerName ?? ""),
+              value: orderData[index].subCustomerName ?? ""),
           DataGridCell<String>(
               columnName: Constants.orderNo,
-              value: orderData[index].orderNumber ?? ""),
-          DataGridCell<String>(
-              columnName: Constants.saleType,
               value: index < orderData.length - 1
-                  ? orderData[index].saleType ?? ""
+                  ? orderData[index].orderNumber ?? ""
                   : "Total:"),
           DataGridCell<String>(
             columnName: Constants.bill,
@@ -89,7 +90,12 @@ class OrderTableDataSource extends DataGridSource {
                                     : AppColors.green.withOpacity(0.8),
                                 label: Constants.approved,
                                 textSize: 10,
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (orderData[index].isApprovedAsm != true) {
+                                    Get.put(OrderHistoryAsmController())
+                                        .orderApprovedASM(index);
+                                  }
+                                },
                               )
                             : const SizedBox(),
                       ],

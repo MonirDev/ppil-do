@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:ppildo/app/common/controller/check_network.dart';
 import 'package:ppildo/app/data/models/customer_model.dart';
 import 'package:ppildo/app/data/models/product_model.dart';
+import 'package:ppildo/app/data/models/sales_with_date_asm_model.dart';
 import 'package:ppildo/app/data/models/sales_with_date_model.dart';
 import 'package:ppildo/app/data/models/sub_customer_model.dart';
 import 'package:ppildo/app/data/service/order_service.dart';
-import 'package:ppildo/app/modules/home/controllers/home_controller.dart';
 import 'package:ppildo/app/utils/constants.dart';
 
 class OrderDataSource {
@@ -23,12 +23,7 @@ class OrderDataSource {
         throw "${Constants.checkConnectivity}, ${Constants.tryAgain}";
       } else {
         final response = await orderService.getSalesWithDate(
-          fromDate,
-          toDate,
-          Get.find<HomeController>().isMr.value
-              ? Constants.getSalesWithDateMREndpoint
-              : Constants.getSalesWithDateASMEndpoint,
-        );
+            fromDate, toDate, Constants.getSalesWithDateMREndpoint);
         if (response.statusCode == 200) {
           final responseBody = response.data;
           return SalesWithDateListModel.fromJson(responseBody);
@@ -43,7 +38,7 @@ class OrderDataSource {
     }
   }
 
-  Future<SalesWithDateListModel> getSalesWithDateASMList(
+  Future<SalesWithDateASMListModel> getSalesWithDateASMList(
     DateTime fromDate,
     DateTime toDate,
   ) async {
@@ -57,7 +52,7 @@ class OrderDataSource {
         );
         if (response.statusCode == 200) {
           final responseBody = response.data;
-          return SalesWithDateListModel.fromJson(responseBody);
+          return SalesWithDateASMListModel.fromJson(responseBody);
         } else if (response.statusCode == 401) {
           throw (Constants.tokenExpired);
         } else {
@@ -114,8 +109,8 @@ class OrderDataSource {
     }
   }
 
-  Future<void> orderApprovedAsm(
-    SalesWithDateModel data,
+  Future<bool> orderApprovedAsm(
+    OrderAsmModel data,
   ) async {
     try {
       if (await CheckNetwork.checkNetwork() == false) {
@@ -124,7 +119,7 @@ class OrderDataSource {
         final response = await orderService.orderApprovedAsm(data);
         if (response.statusCode == 200) {
           // final responseBody = response.data;
-          // return responseBody;
+          return true;
         } else if (response.statusCode == 401) {
           throw (Constants.tokenExpired);
         } else {

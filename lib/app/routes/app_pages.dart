@@ -8,6 +8,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/order_history/bindings/order_history_binding.dart';
 import '../modules/order_history/views/order_history_view.dart';
+import '../modules/order_history_asm/bindings/order_history_asm_binding.dart';
+import '../modules/order_history_asm/views/order_history_asm_view.dart';
 import '../modules/pdf_view/bindings/pdf_view_binding.dart';
 import '../modules/pdf_view/views/pdf_view_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.pdf_view,
       page: () => const PdfViewView(),
       binding: PdfViewBinding(),
+    ),
+    GetPage(
+      name: _Paths.orderHistoryAsm,
+      page: () => OrderHistoryAsmView(),
+      binding: OrderHistoryAsmBinding(),
     ),
   ];
 }

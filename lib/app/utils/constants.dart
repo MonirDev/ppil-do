@@ -137,6 +137,7 @@ class Constants {
   static const String fromDate = "From Date";
   static const String toDate = "To Date";
   static const String search = "Search";
+  static const String mr = " MR ";
   static const String approved = "Approved";
   static const String preview = "Preview";
   static const String sl = "SL";
@@ -221,6 +222,91 @@ class Constants {
             alignment: Alignment.center,
             child: const Text(
               Constants.saleType,
+            ))),
+    GridColumn(
+        columnName: Constants.bill,
+        label: Container(
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.bill,
+            ))),
+    GridColumn(
+      columnName: Constants.reviewPreview,
+      label: Container(
+        alignment: Alignment.center,
+        child: const Text(
+          Constants.reviewPreview,
+        ),
+      ),
+    ),
+    GridColumn(
+      columnName: " ",
+      label: Container(
+        alignment: Alignment.center,
+        child: const Text(
+          " ",
+        ),
+      ),
+    ),
+  ];
+  static List<GridColumn> orderTableColumnAsm = <GridColumn>[
+    GridColumn(
+        columnName: Constants.sl,
+        label: Container(
+            padding: const EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.sl,
+            ))),
+    GridColumn(
+        columnName: Constants.mr,
+        label: Container(
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.mr,
+            ))),
+    GridColumn(
+        columnName: Constants.date,
+        label: Container(
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.date,
+            ))),
+    GridColumn(
+        columnName: Constants.partyId,
+        label: Container(
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.partyId,
+            ))),
+    GridColumn(
+        columnName: Constants.party,
+        label: Container(
+            height: 150,
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.party,
+            ))),
+    GridColumn(
+        columnName: Constants.subId,
+        label: Container(
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.subId,
+            ))),
+    GridColumn(
+        columnName: Constants.subDealer,
+        label: Container(
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.subDealer,
+            ))),
+    GridColumn(
+        columnName: Constants.orderNo,
+        label: Container(
+            alignment: Alignment.center,
+            child: const Text(
+              Constants.orderNo,
             ))),
     GridColumn(
         columnName: Constants.bill,

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:ppildo/app/data/data_source/order_data_source.dart';
 import 'package:ppildo/app/data/models/customer_model.dart';
 import 'package:ppildo/app/data/models/product_model.dart';
+import 'package:ppildo/app/data/models/sales_with_date_asm_model.dart';
 import 'package:ppildo/app/data/models/sales_with_date_model.dart';
 import 'package:ppildo/app/data/models/sub_customer_model.dart';
 
@@ -20,7 +21,7 @@ class OrderRepository {
     }
   }
 
-  Future<SalesWithDateListModel> getSalesWithDateASMList(
+  Future<SalesWithDateASMListModel> getSalesWithDateASMList(
     DateTime fromDate,
     DateTime toDate,
   ) async {
@@ -67,13 +68,13 @@ class OrderRepository {
     }
   }
 
-  Future<void> orderApprovedAsm(
-    SalesWithDateModel data,
+  Future<bool> orderApprovedAsm(
+    OrderAsmModel data,
   ) async {
     try {
       // ignore: unused_local_variable
       final response = await OrderDataSource().orderApprovedAsm(data);
-      // return response;
+      return response;
     } catch (e) {
       rethrow;
     }
