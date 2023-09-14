@@ -66,10 +66,10 @@ class HomeView extends GetView<HomeController> {
 //new Order
   Widget _newOrderCount() {
     return Center(
-      child: Text(
-        "New Order: ${controller.newCount}",
-        style: AppTextStyle.bb14,
-      ),
+      child: Obx(() => Text(
+            "New Order: ${controller.newCount.value}",
+            style: AppTextStyle.bb14,
+          )),
     );
   }
 

@@ -16,7 +16,7 @@ class HomeController extends GetxController with StateMixin {
   late SharedPreferences pref;
   var isMr = true.obs;
   var isLoading = false.obs;
-  int newCount = 0;
+  var newCount = 0.obs;
 
   //Put repository
   final CustomerRepository _customerRepository = Get.put(CustomerRepository());
@@ -74,7 +74,7 @@ class HomeController extends GetxController with StateMixin {
     try {
       await _orderRepository.newOrderCount().then(
         (value) async {
-          newCount = value ?? 0;
+          newCount.value = value ?? 0;
           isLoading(false);
         },
       );

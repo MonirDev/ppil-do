@@ -109,9 +109,18 @@ class OrderHistoryAsmView extends GetView<OrderHistoryAsmController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                Constants.orderList,
-                style: AppTextStyle.bb18,
+              RichText(
+                text: TextSpan(
+                  text: "${Constants.orderList} - ",
+                  style: AppTextStyle.bb18,
+                  children: [
+                    TextSpan(
+                      text:
+                          " New : ${controller.homeController.newCount.value}",
+                      style: AppTextStyle.nb14.copyWith(color: AppColors.green),
+                    ),
+                  ],
+                ),
               ),
               SpacerWidget.h10,
               Container(

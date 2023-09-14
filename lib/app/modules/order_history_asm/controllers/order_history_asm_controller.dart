@@ -27,6 +27,7 @@ class OrderHistoryAsmController extends GetxController {
 
 //put repository
   final OrderRepository _orderRepository = Get.put(OrderRepository());
+  final HomeController homeController = Get.find<HomeController>();
 
   @override
   void onInit() async {
@@ -85,7 +86,10 @@ class OrderHistoryAsmController extends GetxController {
             isMr: Get.find<HomeController>().isMr.value,
           );
 
-          isLoading(false);
+          await homeController.newOrderCount().then((value) {
+            isLoading(false);
+            // _homeController.newCount.value=
+          });
         },
       );
     } catch (e) {
