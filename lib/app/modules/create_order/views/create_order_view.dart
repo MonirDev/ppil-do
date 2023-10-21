@@ -211,7 +211,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                     controller.selectedCustomerDueBalance.value > 0.0 ? 10 : 0),
             alignment: Alignment.topLeft,
             child: Text(
-              "${Constants.dueBalance} : ${controller.selectedCustomerDueBalance}",
+              "${Constants.dueBalance} : ${controller.selectedCustomerDueBalance.toStringAsFixed(2)}",
               style: AppTextStyle.bw16.copyWith(color: AppColors.green),
             ),
           ),

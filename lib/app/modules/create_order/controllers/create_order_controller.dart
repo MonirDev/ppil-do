@@ -156,7 +156,9 @@ class CreateOrderController extends GetxController {
     } catch (e) {
       Get.back();
       CommonWidget.responseErrorPopUp(e.toString(), () {
-        if (e.toString() != Constants.tokenExpired) getCustomerList();
+        if (e.toString() != Constants.tokenExpired) {
+          getSubCustomerList(customerId);
+        }
       });
       log("SubCustomer Api error");
     }
@@ -306,6 +308,9 @@ class CreateOrderController extends GetxController {
     selectedCustomerId.value = customer.id ?? -1;
     selectedCustomerName.value = customer.name!;
     customerModel.value = customer;
+    selectedSubCustomerName.value = "";
+    deliveryMNoTextEditingController.value.text = "";
+    deliveryAddressTextEditingController.value.text = "";
     if (selectedCustomerId.value != -1) {
       await getSubCustomerList(selectedCustomerId.value);
       subCustomerModel.value = SubCustomerModel();
@@ -316,6 +321,9 @@ class CreateOrderController extends GetxController {
   subcustomerChanged(SubCustomerModel subCustomer) async {
     selectedSubCustomerName.value = subCustomer.subCustomerName!;
     subCustomerModel.value = subCustomer;
+    deliveryMNoTextEditingController.value.text = subCustomer.phone ?? "";
+    deliveryAddressTextEditingController.value.text =
+        subCustomer.deliveryAddress ?? "";
   }
 
   //select Product func

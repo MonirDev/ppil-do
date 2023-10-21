@@ -19,7 +19,7 @@ class SubCustomerModel {
   final String? phone;
   final String? contactPerson;
   final String? contactNumber;
-  final String? address;
+  final String? deliveryAddress;
   // final String? remarks;
   // final String? fileNo;
   // final String? refName;
@@ -42,7 +42,7 @@ class SubCustomerModel {
     this.phone,
     this.contactPerson,
     this.contactNumber,
-    this.address,
+    this.deliveryAddress,
     // this.remarks,
     // this.fileNo,
     // this.refName,
@@ -67,7 +67,7 @@ class SubCustomerModel {
         phone: json["phone"],
         contactPerson: json["contactPerson"],
         contactNumber: json["contactNumber"],
-        address: json["address"],
+        deliveryAddress: json["deliveryAddress"],
         // remarks: json["remarks"],
         // fileNo: json["fileNo"],
         // refName: json["refName"],

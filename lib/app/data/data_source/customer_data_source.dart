@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:ppildo/app/common/controller/check_network.dart';
 import 'package:ppildo/app/data/models/customer_model.dart';
@@ -55,6 +57,7 @@ class CustomerDataSource {
         final response = await customerService.getSubCustomer(customerId);
         if (response.statusCode == 200) {
           final responseBody = response.data;
+          log(responseBody.toString());
 
           return SubCustomerListModel.fromJson(responseBody);
         } else {
