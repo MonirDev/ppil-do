@@ -51,43 +51,51 @@ class CustomTable extends StatelessWidget {
 
   _buildDescription(ProductModel product) {
     return TableCell(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-          child: Text(
-            product.productItemName ?? "",
-            style: AppTextStyle.bb12,
-          ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Text(
-          //       product.productItemName ?? "",
-          //       style: AppTextStyle.bb12,
-          //     ),
-          //     SpacerWidget.h6,
-          //     _buildRowItem(
-          //       Constants.category,
-          //       product.productCategoryName ?? "Empty",
-          //     ),
-          //     SpacerWidget.h6,
-          //     _buildRowItem(
-          //       Constants.model,
-          //       product.productModelName ?? "Empty",
-          //     ),
-          //     SpacerWidget.h6,
-          //     _buildRowItem(
-          //       Constants.group,
-          //       product.productGroupName ?? "Empty",
-          //     ),
-          //     SpacerWidget.h6,
-          //     _buildRowItem(
-          //       Constants.brand,
-          //       product.productBrandName ?? "Empty",
-          //     ),
-          //   ],
-          // ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              product.productItemName ?? "",
+              style: AppTextStyle.bb12,
+            ),
+            SpacerWidget.h5,
+            Text(
+              "Color: ${product.color ?? ""}",
+              style: AppTextStyle.nb12,
+            ),
+          ],
         ),
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     Text(
+        //       product.productItemName ?? "",
+        //       style: AppTextStyle.bb12,
+        //     ),
+        //     SpacerWidget.h6,
+        //     _buildRowItem(
+        //       Constants.category,
+        //       product.productCategoryName ?? "Empty",
+        //     ),
+        //     SpacerWidget.h6,
+        //     _buildRowItem(
+        //       Constants.model,
+        //       product.productModelName ?? "Empty",
+        //     ),
+        //     SpacerWidget.h6,
+        //     _buildRowItem(
+        //       Constants.group,
+        //       product.productGroupName ?? "Empty",
+        //     ),
+        //     SpacerWidget.h6,
+        //     _buildRowItem(
+        //       Constants.brand,
+        //       product.productBrandName ?? "Empty",
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

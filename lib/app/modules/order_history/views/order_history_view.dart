@@ -194,6 +194,7 @@ class OrderHistoryView extends GetView<OrderHistoryController> {
               controller: controllerText.value,
               inputType: inputType ?? TextInputType.number,
               inputAction: TextInputAction.next,
+              isSuffixWidget: true,
               suffixIcon: suffixIcon != null
                   ? Icon(
                       suffixIcon,

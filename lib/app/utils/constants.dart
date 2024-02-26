@@ -63,6 +63,7 @@ class Constants {
   static const String asmTypeString = "DO-ASM-Approval";
 
   ////
+  static const String color = "Color";
   static const String login = "Login";
   static const String userName = "User Name";
   static const String enterUserName = "Enter username";
@@ -159,6 +160,13 @@ class Constants {
   static const String downloadPdf = "Download PDF";
 
   //Constants list
+  static const List<String> colorTypeList = [
+    "Green",
+    "White",
+    "Off White",
+    "Gray",
+    "Pink",
+  ];
   static const List<String> paymentList = [
     'Cash on Delivery',
     'Calender Month',

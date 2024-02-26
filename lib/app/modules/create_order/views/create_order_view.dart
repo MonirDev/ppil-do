@@ -8,6 +8,7 @@ import 'package:ppildo/app/common/widgets/custom_table.dart';
 import 'package:ppildo/app/common/widgets/logo_widget.dart';
 import 'package:ppildo/app/common/widgets/table_header.dart';
 import 'package:ppildo/app/common/widgets/text_form_field_widget.dart';
+import 'package:ppildo/app/modules/create_order/widgets/dropdown_item_color_type.dart';
 import 'package:ppildo/app/modules/create_order/widgets/dropdown_item_customer.dart';
 import 'package:ppildo/app/modules/create_order/widgets/dropdown_item_payment_mode.dart';
 import 'package:ppildo/app/modules/create_order/widgets/dropdown_item_product.dart';
@@ -63,37 +64,46 @@ class CreateOrderView extends GetView<CreateOrderController> {
             Obx(
               () => Visibility(
                 visible: controller.dropProductSelected.value,
-                child: Row(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(
-                      child: _buildTextFormFieldItem(
-                        Constants.ratePcs,
-                        Constants.enterPrice,
-                        controller.rateTextEditingController,
-                        null,
-                        (value) => controller.ratePerPcsOnChanged(value),
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildTextFormFieldItem(
+                            Constants.ratePcs,
+                            Constants.enterPrice,
+                            controller.rateTextEditingController,
+                            null,
+                            (value) => controller.ratePerPcsOnChanged(value),
+                          ),
+                        ),
+                        SpacerWidget.w15,
+                        Expanded(
+                          child: _buildTextFormFieldItem(
+                            Constants.quantity,
+                            Constants.enterQuantity,
+                            controller.quantityTextEditingController,
+                            null,
+                            (value) => controller.quantityOnChanged(value),
+                          ),
+                        ),
+                        SpacerWidget.w15,
+                        Expanded(
+                          child: _buildTextFormFieldItem(
+                            Constants.discountPerc,
+                            Constants.enterDiscount,
+                            controller.discountTextEditingController,
+                            null,
+                            (value) => controller.discountOnChanged(value),
+                          ),
+                        ),
+                      ],
                     ),
-                    SpacerWidget.w15,
-                    Expanded(
-                      child: _buildTextFormFieldItem(
-                        Constants.quantity,
-                        Constants.enterQuantity,
-                        controller.quantityTextEditingController,
-                        null,
-                        (value) => controller.quantityOnChanged(value),
-                      ),
-                    ),
-                    SpacerWidget.w15,
-                    Expanded(
-                      child: _buildTextFormFieldItem(
-                        Constants.discountPerc,
-                        Constants.enterDiscount,
-                        controller.discountTextEditingController,
-                        null,
-                        (value) => controller.discountOnChanged(value),
-                      ),
-                    ),
+                    SpacerWidget.h15,
+                    DropDownItemColorType(),
                   ],
                 ),
               ),
@@ -274,6 +284,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               controller: controllerText.value,
               inputType: inputType ?? TextInputType.number,
               inputAction: TextInputAction.next,
+              isSuffixWidget: true,
               suffixIcon: suffixIcon != null
                   ? Icon(
                       suffixIcon,

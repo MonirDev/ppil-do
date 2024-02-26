@@ -15,6 +15,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? isPassSecure;
   final bool? enabled;
   final bool? readOnly;
+  final bool? isSuffixWidget;
   final String? validateText;
   final String? label;
   final double? contentpaddingLeft;
@@ -45,6 +46,7 @@ class CustomTextFormField extends StatelessWidget {
     this.contentpaddingLeft,
     this.readOnly,
     this.borderRadius,
+    this.isSuffixWidget,
   });
   static const InputBorder transparentBorder = OutlineInputBorder(
     borderSide: BorderSide(
@@ -85,33 +87,34 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
             hintText: hintText,
             hintStyle: AppTextStyle.nw14.copyWith(color: AppColors.grey),
-            suffixIcon: suffixIcon ??
-                GestureDetector(
-                  onTap: suffixClick ?? () {},
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: isValid == true &&
-                            controller!.text != '' &&
-                            isPassField == false
-                        ? Icon(
-                            suffixDone,
-                            color: AppColors.green,
-                          )
-                        : isValid == false &&
-                                controller!.text != '' &&
-                                isPassField == false
-                            ? Icon(
-                                suffixClose,
-                                color: AppColors.red,
-                              )
-                            : isPassField == true
-                                ? Icon(
-                                    suffixEye,
-                                    color: AppColors.grey,
-                                  )
-                                : null,
+            suffixIcon: isSuffixWidget == true
+                ? suffixIcon
+                : GestureDetector(
+                    onTap: suffixClick ?? () {},
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: isValid == true &&
+                              controller!.text != '' &&
+                              isPassField == false
+                          ? Icon(
+                              suffixDone,
+                              color: AppColors.green,
+                            )
+                          : isValid == false &&
+                                  controller!.text != '' &&
+                                  isPassField == false
+                              ? Icon(
+                                  suffixClose,
+                                  color: AppColors.red,
+                                )
+                              : isPassField == true
+                                  ? Icon(
+                                      suffixEye,
+                                      color: AppColors.grey,
+                                    )
+                                  : null,
+                    ),
                   ),
-                ),
             label: label == null
                 ? null
                 : Text(
@@ -127,7 +130,8 @@ class CustomTextFormField extends StatelessWidget {
             focusedErrorBorder: transparentBorder,
             disabledBorder: transparentBorder,
             enabledBorder: transparentBorder,
-            contentPadding: EdgeInsets.only(left: contentpaddingLeft ?? 30)),
+            contentPadding:
+                EdgeInsets.only(left: contentpaddingLeft ?? 30, right: 10)),
         onChanged: onchanged,
       ),
     );

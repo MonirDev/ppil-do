@@ -23,7 +23,7 @@ class ProductModel {
   // final int? productModelId;
   // final String? stockPack;
   // final String? challanUnit;
-  final String? color;
+  String? color;
   final String? thickness;
   final double? purchaseRate;
   final double? saleRateTp;

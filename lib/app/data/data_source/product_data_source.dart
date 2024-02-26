@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:ppildo/app/common/controller/check_network.dart';
 import 'package:ppildo/app/data/models/product_model.dart';
@@ -15,7 +17,7 @@ class ProductDataSource {
         final response = await productService.getProducts();
         if (response.statusCode == 200) {
           final responseBody = response.data;
-
+          log("Product $responseBody");
           return ProductListModel.fromJson(responseBody);
         } else {
           throw ("${Constants.failedToConnectServer} , ${Constants.tryAgain}");

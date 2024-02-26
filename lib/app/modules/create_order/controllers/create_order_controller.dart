@@ -34,6 +34,7 @@ class CreateOrderController extends GetxController {
   var subCustomerModel = SubCustomerModel().obs;
   var productModel = ProductModel().obs;
   var modeOfPayment = "".obs;
+  var colorType = "".obs;
   var selectedCustomerId = RxInt(-1);
   var selectedSubCustomerId = RxInt(-1);
   var selectedProductAmount = "".obs; //Total amount after discount
@@ -220,6 +221,7 @@ class CreateOrderController extends GetxController {
             double.parse(discount); //discount perc. set by user
         productModel.value.totalAmoount = double.parse(
             selectedProductAmount.value); //Total amount after discount
+        productModel.value.color = colorType.value;
         selectedProductList.add(productModel.value);
 
         //reset product section
@@ -228,6 +230,7 @@ class CreateOrderController extends GetxController {
         rateTextEditingController.value.text = "";
         quantityTextEditingController.value.text = "1";
         discountTextEditingController.value.text = "";
+        colorType.value = "";
 
         CommonWidget.callSnackBar(Constants.addedProductSuccessfully, false);
       } else {
@@ -335,6 +338,7 @@ class CreateOrderController extends GetxController {
     selectedProductAmount.value = product.saleRateMrp.toString();
     quantityTextEditingController.value.text = "1";
     discountTextEditingController.value.text = "";
+    colorType.value = product.color ?? "";
     Get.focusScope?.unfocus();
 
     productModel.value = product;
@@ -383,6 +387,10 @@ class CreateOrderController extends GetxController {
   //notes onChanged
   paymentModeChanged(String value) {
     modeOfPayment.value = value;
+  }
+
+  colorTypeChanged(String value) {
+    colorType.value = value;
   }
 
   //select sale date date

@@ -58,6 +58,7 @@ class OrderService extends DioBaseService {
                 "productCode": e.productCode,
                 "total": e.saleRate! * e.quantity!,
                 "commPercent": e.disPerc,
+                "colorType": e.color,
                 "commAmount": (e.saleRate! - e.netRate!) * e.quantity!,
                 "netAmount": e.totalAmoount
               })
