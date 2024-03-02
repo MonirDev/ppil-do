@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? inputType;
   final TextInputAction? inputAction;
+  final FocusNode? focusNode;
   final IconData? suffixDone;
   final IconData? suffixClose;
   final IconData? suffixEye;
@@ -47,6 +48,7 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly,
     this.borderRadius,
     this.isSuffixWidget,
+    this.focusNode,
   });
   static const InputBorder transparentBorder = OutlineInputBorder(
     borderSide: BorderSide(
@@ -77,6 +79,7 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         keyboardType: inputType,
         textInputAction: inputAction,
+        focusNode: focusNode,
         maxLines: 1,
         enabled: enabled ?? true,
         readOnly: readOnly ?? false,

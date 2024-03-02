@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ppildo/app/common/widgets/custom_button.dart';
 import 'package:ppildo/app/common/widgets/text_form_field_widget.dart';
+import 'package:ppildo/app/data/models/company_model.dart';
 import 'package:ppildo/app/modules/login/controllers/login_controller.dart';
+import 'package:ppildo/app/modules/login/widgets/company_dropdown.dart';
 import 'package:ppildo/app/utils/app_colors.dart';
 import 'package:ppildo/app/utils/assets.dart';
 import 'package:ppildo/app/utils/constants.dart';
@@ -87,6 +89,8 @@ class LoginView extends GetView<LoginController> {
             controller.isPassEmpty.value == true
                 ? _buildValidateText(Constants.passRequired)
                 : const SizedBox(),
+            SpacerWidget.h20,
+            DropDownItemCompany(),
           ],
         ));
   }
@@ -162,10 +166,15 @@ class LoginView extends GetView<LoginController> {
           suffixDone: Icons.done,
           suffixClose: Icons.close,
           isPassField: false,
+          focusNode: controller.userFocusNode.value,
           onchanged: (value) {
             controller.userNameTextEditingController.value.text == ''
                 ? controller.isUserNameEmpty.value = true
                 : controller.isUserNameEmpty.value = false;
+            controller.companyList.clear();
+            controller.companyModel.value = CompanyModel();
+            // controller.isGetCompanyAPICalled.value = false;
+            // print(controller.isGetCompanyAPICalled.value);
           },
           hintText: Constants.enterUserName,
           borderRadius: 30,

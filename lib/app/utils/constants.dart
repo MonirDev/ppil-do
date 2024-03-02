@@ -11,6 +11,8 @@ class Constants {
 
   //api name
   static const String loginEndpoint = "Auth/login";
+  static const String getUserCompanyEndpoint =
+      "Departments/GetDepartmentsByUser?User=";
   static const String getCustomerEndpoint = "Customers/GetCustomersMR";
   static const String getCustomerDueBalanceEndpoint =
       "CustomerLedger/GetCustomerLedgerInfo";
